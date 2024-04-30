@@ -1,0 +1,29 @@
+﻿@page "/"
+@inject IJSRuntime jsRuntime
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+@* 
+<button class="hiddenStop" style="display:none;"> LAL</button> *@
+
+<div class="wrapper mt-5">
+    <section class="main-controls">
+        <canvas id="canvas" class="visualizer" height="60"></canvas>
+        <div id="buttons">
+            <button class="@recordButton" disabled="@recording" @onclick=Record>Record</button>
+            <button class="stop bouton" disabled="@notRecording" @onclick=Stop>Stop</button>
+        </div>
+    </section>
+
+    BreakB
+    <section class="sound-clips">
+    </section>
+    BreakC
+    <audio controls autoplay>
+    </audio>
+    BreakD
+</div>
