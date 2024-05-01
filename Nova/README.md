@@ -11,5 +11,12 @@ https://stackoverflow.com/questions/66941052/post-form-data-to-blazor-razor-comp
 
 Get POST handling to handle audio in memory without doing any saves
 
+Or work on how to read BLOB object from blazor side.  Looks like I can reference the blob in the recorder.export function
+
+
+
 Look into NuGet audio-to-text libraries.
+
+Note to self: Visualizer has real-time sound info, so I might be able to get audio without explicit record operation?
+
 

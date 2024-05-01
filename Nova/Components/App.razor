@@ -40,13 +40,38 @@
     <script src="_framework/blazor.web.js"></script>
 
 
+    <script>
+
+    </script>
+
+
+
 
 
 
     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
     <script>
+
+
+        let dotNetRef;
+        window.setDotNetRef = (ref) => {
+            //ref.invokeMethodAsync('ReceiveDataFromJavaScript', 'xcvbxgfdsftgsg');
+            dotNetRef = ref;
+        };
+        window.sendData = (data) => {
+            dotNetRef.invokeMethodAsync('ReceiveDataFromJavaScript', data);
+        }
+
+
+
+
+
+
+
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+
 
 
         let audioCtx;
@@ -155,21 +180,37 @@
                 recorder.stop();
 
                 recorder.exportWAV(function (s) {
-                    alert("Hello World");
+                    alert("Before Send S");
+
+                    window.sendData(s);
+
+                    alert("After Send S");
+
                     wav = window.URL.createObjectURL(s);
-                    audio.src = window.URL.createObjectURL(s);
-                    let filename = new Date().toISOString().replaceAll(':', "");
-                    let fd = new FormData();
-                    fd.append("file", s, filename);
-                    let xhr = new XMLHttpRequest();
-                    xhr.addEventListener("load", transferComplete);
-                    xhr.addEventListener("error", transferFailed)
-                    xhr.addEventListener("abort", transferFailed)
-                    alert("Hello WorldB");
-                    xhr.open("POST", "api/SaveAudio/Save/", true);
-                    alert("Hello WorldC");
-                    xhr.send(fd);
-                    alert("Hello WorldD");
+                    window.sendData(wav);
+
+                    alert("After send wav");
+
+                    //alert("Hello World");
+
+                    // window.sendData("asdf");
+
+                    // wav = window.URL.createObjectURL(s);
+                    // alert(wav);
+                    // audio.src = window.URL.createObjectURL(s);
+                    // alert(audio.src);
+                    // let filename = new Date().toISOString().replaceAll(':', "");
+                    // let fd = new FormData();
+                    // fd.append("file", s, filename);
+                    // let xhr = new XMLHttpRequest();
+                    // xhr.addEventListener("load", transferComplete);
+                    // xhr.addEventListener("error", transferFailed)
+                    // xhr.addEventListener("abort", transferFailed)
+                    // alert("Hello WorldB");
+                    // xhr.open("POST", "api/SaveAudio/Save/", true);
+                    // alert("Hello WorldC");
+                    // xhr.send(fd);
+                    // alert("Hello WorldD");
 
                 });
 
